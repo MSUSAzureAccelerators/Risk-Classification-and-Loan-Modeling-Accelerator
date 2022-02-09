@@ -1,7 +1,7 @@
-
+![MSUS Solution Accelerator](./images/MSUS%20Solution%20Accelerator%20Banner%20Two_981.jpg)
 
 # Risk Classification with Loan Modeling
-# Business Objective
+## Business Objective
   The objective of the Risk Classification with Loan Modeling project is to predict how much loan will be approved by the SBA & their registered lenders when a business applies for a loan through the SBA. 
   
   The Small Business Administration (SBA) was founded in 1953 to assist small businesses in obtaining loans. Small businesses have been the primary source of employment in the       United States. Helping small businesses help with job creation, which reduces unemployment. Small business growth also promotes economic growth. One of the ways the SBA helps     small businesses is by guaranteeing bank loans. This guarantee reduces the risk to banks and encourages them to lend to small businesses. If the loan defaults, the SBA covers     the amount guaranteed, and the bank suffers a loss for the remaining balance.
@@ -12,9 +12,9 @@
   
   Loans guaranteed by the SBA range from small to large and can be used for most business purposes, including long-term fixed assets and operating capital. Some loan programs set   restrictions on how you can use the funds, so check with an SBA-approved lender when requesting a loan. Your lender can match you with the right loan for your business needs.
 
-# What you need to know about SBA Loan
+## What you need to know about SBA Loan
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/What%20you%20need%20to%20know%20about%20Loan.png?raw=true)
-# Business Loan Eligibility requirements
+## Business Loan Eligibility requirements
   Lenders and loan programs have unique eligibility requirements. In general, eligibility is based on what a business does to receive its income, the character of its ownership,     and where the business operates. Normally, businesses must meet size standards, be able to repay, and have a sound business purpose. Even those with bad credit may qualify for     startup funding. The lender will provide you with a full list of eligibility requirements for your loan.
 
     Following are the baseline eligibility requirements:
@@ -28,10 +28,10 @@
       The business cannot get funds from any other financial lender.
 
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/business-loan-factors-1.jpg?raw=true)
-# Business Loans for exporters
+## Business Loans for exporters
   Most U.S. banks view loans for exporters as risky. This can make it harder for you to get loans for things like day-to-day operations, advance orders with suppliers, and debt     refinancing. That’s why the SBA created programs to make it easier for U.S. small businesses to get export loans.
 
-# The Business Loan Data Set (Reference : www.kaggle.com)
+## The Business Loan Data Set (Reference : www.kaggle.com)
   The original data set is from the U.S.SBA loan database, which includes historical data from 1987 through 2014 (899,164 observations) with 27 variables. The data set includes   information on whether the loan was paid off in full or if the SMA had to charge off any amount and how much that amount was. The data set used is a subset of the original       set. It contains loans about the Real Estate and Rental and Leasing industry in California. This file has 2,102 observations and 35 variables. The column Default is an integer   of 1 or zero, and I had to change this column to a factor.
   
             Variable Name			Description
@@ -63,15 +63,15 @@
             GrAppv				        Gross amount of loan approved by bank
             SBA_Appv			        SBA’s guaranteed amount of approved loan
 
-# Technical Stack
+## Technical Stack
   The Business Loan Modeling project will use Azure Synapse Analytics, Azure DataLake Gen2, Azure Machine Learning and PowerBI.
   
-# Architecture Overview
+## Architecture Overview
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/HighLevelReferenceArchitecture.JPG?raw=true)
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/SynapsePipeComponents.JPG?raw=true)
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/EndToEndDI_Analytics_Components.JPG?raw=true)
 
-# Implementation Detail
+## Implementation Detail
 Goal is to train ML model on the SBA loan data and then build a Data engineering pipeline which can further process one or many new loan requests coming in as either API and/or Batch requests. Azure Synapse Pipe from Azure Synapse Workspace is used for consuming data from third party (same can be achieved by leveraging Azure Data Factory). Azure Synapse pipeline was used for multiple purpose:
 1. Data Ingestion (Third Party API to ADLS Gen2)
 2. Orchestration
@@ -130,7 +130,7 @@ You can create a view on top of this query and any client which can talk to SQL 
 
 During Stage 1, we could have also deployed a Real time Inference pipeline which would deploy the API to an existing Kubernetes clusters. Any application can pass parameters to this API with different values and in turn get a response with the Scored label value. This is ideal for interactive applications when a decision needs to be taken immediately. 
 
-# Video series
+## Video series
 
 ![Business Objective](https://github.com/ketsha/Business-Loan-Modeling/blob/main/video/objective.mp4)
 
@@ -148,6 +148,43 @@ https://user-images.githubusercontent.com/22504173/113534348-7679d780-959e-11eb-
 
 ![Load and Score data in Synapse Dedicated SQL pools](https://user-images.githubusercontent.com/22504173/112752381-c81fd200-8fa0-11eb-879c-3ec99e6cb1fd.mp4)
 
-# Deployment
+## Deployment
 
 [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fketsha%2FBusiness-Loan-Modeling%2Fworkspace_publish%2Fsrgosynapseunnmgd%2FTemplateForWorkspace.json)
+
+## License
+Copyright (c) Microsoft Corporation
+
+All rights reserved.
+
+MIT License
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the ""Software""), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
+
+## Contributing
+
+This project welcomes contributions and suggestions.  Most contributions require you to agree to a
+Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
+the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
+
+When you submit a pull request, a CLA bot will automatically determine whether you need to provide
+a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
+provided by the bot. You will only need to do this once across all repos using our CLA.
+
+This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
+For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
+contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
+
+## Trademarks
+
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
+trademarks or logos is subject to and must follow 
+[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
+Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
+Any use of third-party trademarks or logos are subject to those third-party's policies.
+
