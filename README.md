@@ -148,7 +148,7 @@ During Stage 1, we could have also deployed a Real time Inference pipeline which
 
 ## Deployment
 
-[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMSUSSolutionAccelerators%2FRisk-Classification-and-Load-Modeling-Solution-Accelerator%2FTemplateForWorkspace.json)
+[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMSUSSolutionAccelerators%2FRisk-Classification-and-Load-Modeling-Solution-Accelerator%2Fmain%2FTemplateForWorkspace.json)
 
 ## License
 Copyright (c) Microsoft Corporation
