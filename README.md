@@ -132,25 +132,23 @@ During Stage 1, we could have also deployed a Real time Inference pipeline which
 
 ## Video series
 
-![Business Objective](https://github.com/ketsha/Business-Loan-Modeling/blob/main/video/objective.mp4)
+[Business Objective](https://github.com/MSUSSolutionAccelerators/Risk-Classification-and-Load-Modeling-Solution-Accelerator/blob/main/video/objective.mp4)
 
-https://user-images.githubusercontent.com/22504173/113534348-7679d780-959e-11eb-8d4e-cb415d72c09b.mp4
+[Introduce Synapse workspace and provisioned resources](https://user-images.githubusercontent.com/22504173/112752400-d66dee00-8fa0-11eb-83e6-b1279449e9ba.mp4) 
 
-![Introduce Synapse workspace and provisioned resources](https://user-images.githubusercontent.com/22504173/112752400-d66dee00-8fa0-11eb-83e6-b1279449e9ba.mp4) 
+[Raw Data ingestion - Synapse Pipelines](https://user-images.githubusercontent.com/22504173/112752398-d40b9400-8fa0-11eb-8680-1a2c1c67fba3.mp4) 
 
-![Raw Data ingestion - Synapse Pipelines](https://user-images.githubusercontent.com/22504173/112752398-d40b9400-8fa0-11eb-8680-1a2c1c67fba3.mp4) 
+[Data cleansing\transformation - Synapse Dataflows](https://user-images.githubusercontent.com/22504173/112752404-d8d04800-8fa0-11eb-9a9e-f477564ec373.mp4) 
 
-![Data cleansing\transformation - Synapse Dataflows](https://user-images.githubusercontent.com/22504173/112752404-d8d04800-8fa0-11eb-9a9e-f477564ec373.mp4) 
+[Load data into Synapse Spark for ML](https://user-images.githubusercontent.com/22504173/112752394-d110a380-8fa0-11eb-9de6-1d6002340819.mp4) 
 
-![Load data into Synapse Spark for ML](https://user-images.githubusercontent.com/22504173/112752394-d110a380-8fa0-11eb-9de6-1d6002340819.mp4) 
+[Deploy a model in Synapse Spark using Azure ML - Automated ML](https://user-images.githubusercontent.com/22504173/112752387-cc4bef80-8fa0-11eb-8f52-294e76ccf4be.mp4) 
 
-![Deploy a model in Synapse Spark using Azure ML - Automated ML](https://user-images.githubusercontent.com/22504173/112752387-cc4bef80-8fa0-11eb-8f52-294e76ccf4be.mp4) 
-
-![Load and Score data in Synapse Dedicated SQL pools](https://user-images.githubusercontent.com/22504173/112752381-c81fd200-8fa0-11eb-879c-3ec99e6cb1fd.mp4)
+[Load and Score data in Synapse Dedicated SQL pools](https://user-images.githubusercontent.com/22504173/112752381-c81fd200-8fa0-11eb-879c-3ec99e6cb1fd.mp4)
 
 ## Deployment
 
-[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fketsha%2FBusiness-Loan-Modeling%2Fworkspace_publish%2Fsrgosynapseunnmgd%2FTemplateForWorkspace.json)
+[![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMSUSSolutionAccelerators%2FRisk-Classification-and-Load-Modeling-Solution-Accelerator%2FTemplateForWorkspace.json)
 
 ## License
 Copyright (c) Microsoft Corporation
