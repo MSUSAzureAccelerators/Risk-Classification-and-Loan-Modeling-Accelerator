@@ -1,0 +1,19 @@
+{
+	"name": "SBA_raw_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "link_to_sbadata_storage",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "SBAnational2.csv",
+				"container": "input"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

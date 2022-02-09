@@ -1,0 +1,138 @@
+{
+	"name": "DestinationDataset_jwv",
+	"properties": {
+		"annotations": [],
+		"type": "SqlPoolTable",
+		"schema": [
+			{
+				"name": "LoanNr_ChkDgt",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Name",
+				"type": "nvarchar"
+			},
+			{
+				"name": "City",
+				"type": "nvarchar"
+			},
+			{
+				"name": "State",
+				"type": "nvarchar"
+			},
+			{
+				"name": "Zip",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Bank",
+				"type": "nvarchar"
+			},
+			{
+				"name": "BankState",
+				"type": "nvarchar"
+			},
+			{
+				"name": "NAICS",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "ApprovalDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "ApprovalFY",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "Term",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "NoEmp",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "NewExist",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "CreateJob",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "RetainedJob",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "FranchiseCode",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "UrbanRural",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "RevLineCr",
+				"type": "bit"
+			},
+			{
+				"name": "LowDoc",
+				"type": "bit"
+			},
+			{
+				"name": "DisbursementDate",
+				"type": "nvarchar"
+			},
+			{
+				"name": "DisbursementGross",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "BalanceGross",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "MIS_Status",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "ChgOffPrinGr",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "GrAppv",
+				"type": "bigint",
+				"precision": 19
+			},
+			{
+				"name": "SBA_Appv",
+				"type": "bigint",
+				"precision": 19
+			}
+		],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "SBACurated2"
+		},
+		"sqlPool": {
+			"referenceName": "srgosqlpoolsyn",
+			"type": "SqlPoolReference"
+		}
+	}
+}

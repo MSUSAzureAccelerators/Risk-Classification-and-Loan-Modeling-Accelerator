@@ -1,0 +1,17 @@
+{
+	"name": "Reading JSON data from Fluentbit",
+	"properties": {
+		"content": {
+			"query": "\nSELECT  *\n , JSON_VALUE (jsonContent, '$.log') AS Log_entry\n\nFROM \n\n    OPENROWSET( \n        BULK 'https://srgostorgen2hier.dfs.core.windows.net/fluentbit/fluent-bit-bbd2c_logging_fluent-bit-500c20d544c1fe5d6e31a0d3a019da816c1e61f3eb4ce4c3116ceb9899a0c817/2021/4/28/16/3/*.log', \n        FORMAT = 'CSV', \n        FIELDQUOTE = '0x0b', \n        FIELDTERMINATOR ='0x0b' \n    ) \n    WITH ( \n        jsonContent varchar(8000) \n    ) AS [result] \n\n \nselect * from TaxiView\n\n ALTER VIEW TaxiView \nAS SELECT *, JSON_VALUE (jsonContent, '$.log') AS Log_entry\nFROM \n    OPENROWSET( \n        BULK 'https://srgostorgen2hier.dfs.core.windows.net/fluentbit/fluent-bit-bbd2c_logging_fluent-bit-500c20d544c1fe5d6e31a0d3a019da816c1e61f3eb4ce4c3116ceb9899a0c817/2021/*/*/*/*/*.log', \n        FORMAT = 'CSV', \n        FIELDQUOTE = '0x0b', \n        FIELDTERMINATOR ='0x0b' \n    )  WITH ( \n        jsonContent varchar(8000) \n    ) AS [result] ",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "temp"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

@@ -1,0 +1,45 @@
+{
+	"name": "Clean Loan Raw data",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "LoanRawdata",
+						"type": "DatasetReference"
+					},
+					"name": "PullSourceData"
+				},
+				{
+					"dataset": {
+						"referenceName": "NAICS",
+						"type": "DatasetReference"
+					},
+					"name": "NAICS01"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "LoanCuratedData",
+						"type": "DatasetReference"
+					},
+					"name": "Curateddata"
+				}
+			],
+			"transformations": [
+				{
+					"name": "DerivedColumn1"
+				},
+				{
+					"name": "Join1"
+				},
+				{
+					"name": "RemoveUnnecessaryColumns"
+				}
+			],
+			"script": "source(output(\n\t\tLoanNr_ChkDgt as string,\n\t\tName as string,\n\t\tCity as string,\n\t\tState as string,\n\t\tZip as string,\n\t\tBank as string,\n\t\tBankState as string,\n\t\tNAICS as integer,\n\t\tApprovalDate as string,\n\t\tApprovalFY as integer,\n\t\tTerm as integer,\n\t\tNoEmp as integer,\n\t\tNewExist as string,\n\t\tCreateJob as integer,\n\t\tRetainedJob as integer,\n\t\tFranchiseCode as string,\n\t\tUrbanRural as string,\n\t\tRevLineCr as boolean,\n\t\tLowDoc as boolean,\n\t\tChgOffDate as string,\n\t\tDisbursementDate as string,\n\t\tDisbursementGross as integer '$###,###',\n\t\tBalanceGross as integer '$###,###',\n\t\tMIS_Status as string,\n\t\tChgOffPrinGr as integer '$###,###',\n\t\tGrAppv as integer '$###,###',\n\t\tSBA_Appv as integer '$###,###'\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> PullSourceData\nsource(output(\n\t\tDigitCode as integer,\n\t\tIndustry as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false,\n\tignoreNoFilesFound: false) ~> NAICS01\nPullSourceData derive(IndustryCode = toInteger(NAICS/10000),\n\t\tRisk = toString(case(MIS_Status =='P I F', 'low', MIS_Status =='CHGOFF', 'high'))) ~> DerivedColumn1\nDerivedColumn1, NAICS01 join(IndustryCode == DigitCode,\n\tjoinType:'left',\n\tbroadcast: 'auto')~> Join1\nJoin1 select(mapColumn(\n\t\tLoanNr_ChkDgt,\n\t\tName,\n\t\tCity,\n\t\tState,\n\t\tZip,\n\t\tBank,\n\t\tBankState,\n\t\tNAICS,\n\t\tApprovalDate,\n\t\tApprovalFY,\n\t\tTerm,\n\t\tNoEmp,\n\t\tNewExist,\n\t\tCreateJob,\n\t\tRetainedJob,\n\t\tFranchiseCode,\n\t\tUrbanRural,\n\t\tRevLineCr,\n\t\tLowDoc,\n\t\tChgOffDate,\n\t\tDisbursementDate,\n\t\tDisbursementGross,\n\t\tBalanceGross,\n\t\tMIS_Status,\n\t\tChgOffPrinGr,\n\t\tGrAppv,\n\t\tSBA_Appv,\n\t\tIndustryCode,\n\t\tRisk,\n\t\tIndustry\n\t),\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true) ~> RemoveUnnecessaryColumns\nRemoveUnnecessaryColumns sink(allowSchemaDrift: true,\n\tvalidateSchema: false,\n\ttruncate: true,\n\tskipDuplicateMapInputs: true,\n\tskipDuplicateMapOutputs: true,\n\tpartitionBy('hash', 1)) ~> Curateddata"
+		}
+	}
+}

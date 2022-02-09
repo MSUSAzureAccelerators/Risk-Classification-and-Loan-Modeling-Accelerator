@@ -1,0 +1,24 @@
+{
+	"name": "sbaloanauto",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "Ingest_test_file",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "BlobEventsTrigger",
+		"typeProperties": {
+			"blobPathBeginsWith": "/testinput/blobs/",
+			"ignoreEmptyBlobs": true,
+			"scope": "/subscriptions/35e1448d-7744-4a0b-abb8-1d2aae54dc0a/resourceGroups/ks-cor-loan-deploy/providers/Microsoft.Storage/storageAccounts/sbadata",
+			"events": [
+				"Microsoft.Storage.BlobCreated"
+			]
+		}
+	}
+}

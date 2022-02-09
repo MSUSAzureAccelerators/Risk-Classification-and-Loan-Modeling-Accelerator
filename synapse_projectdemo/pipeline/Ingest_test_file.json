@@ -1,0 +1,129 @@
+{
+	"name": "Ingest_test_file",
+	"properties": {
+		"activities": [
+			{
+				"name": "Ingest test file",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "testinput//"
+					},
+					{
+						"name": "Destination",
+						"value": "testoutput//testresult"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobStorageReadSettings",
+							"recursive": true,
+							"wildcardFileName": "*",
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 0
+						}
+					},
+					"sink": {
+						"type": "DelimitedTextSink",
+						"storeSettings": {
+							"type": "AzureBlobStorageWriteSettings"
+						},
+						"formatSettings": {
+							"type": "DelimitedTextWriteSettings",
+							"quoteAllText": true,
+							"fileExtension": ".txt"
+						}
+					},
+					"enableStaging": false,
+					"validateDataConsistency": false
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_bhv",
+						"type": "DatasetReference",
+						"parameters": {
+							"input file name": "test*.csv"
+						}
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_bhv",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "ML_loan_risk",
+				"type": "AzureMLExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Ingest test file",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"mlPipelineEndpointId": "a408d466-9b64-4e66-8fc6-2cef71fde67d"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureMLService1_loantest",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "ML_SBAloan_amount",
+				"type": "AzureMLExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Ingest test file",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"mlPipelineEndpointId": "ec2de105-109a-4887-9a1f-b0d0fe52c3ff"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureMLService1_loantest",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-08-11T04:22:37Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}

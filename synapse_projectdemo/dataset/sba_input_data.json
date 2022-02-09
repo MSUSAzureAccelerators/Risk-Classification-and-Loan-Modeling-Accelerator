@@ -1,0 +1,19 @@
+{
+	"name": "sba_input_data",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "loandemo_datalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "input_data",
+				"fileSystem": "loanfilecontainer"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

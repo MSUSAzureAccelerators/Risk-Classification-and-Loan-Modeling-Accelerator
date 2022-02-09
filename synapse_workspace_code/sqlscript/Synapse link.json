@@ -1,0 +1,17 @@
+{
+	"name": "Synapse link",
+	"properties": {
+		"content": {
+			"query": "IF (NOT EXISTS(SELECT * FROM sys.credentials WHERE name = 'srgosqlcos2'))\n    THROW 50000, 'As a prerequisite, create a credential with Azure Cosmos DB key in SECRET option:\n    CREATE CREDENTIAL [srgosqlcos2]\n    WITH IDENTITY = ''SHARED ACCESS SIGNATURE'', SECRET = ''HT6FzeeiqxRbMhMmp2NCeOudmJPIB0akIaFpJddTNLFsvlYZNpuPIlL3i603Tcw2ejDhmJoyR5TcHkrE65LzqQ==''', 0\nGO\nCREATE CREDENTIAL [srgosqlcos2] WITH IDENTITY = 'SHARED ACCESS SIGNATURE', SECRET = 'HT6FzeeiqxRbMhMmp2NCeOudmJPIB0akIaFpJddTNLFsvlYZNpuPIlL3i603Tcw2ejDhmJoyR5TcHkrE65LzqQ=='\n\nCREATE VIEW Products\nAS\nSELECT TOP 100 *\nFROM OPENROWSET(​PROVIDER = 'CosmosDB',\n                CONNECTION = 'Account=srgosqlcos;Database=RetailSalesDemoDB',\n                OBJECT = 'Products',\n                SERVER_CREDENTIAL = 'srgosqlcos2'\n) AS [Products]\n\nCREATE VIEW RetailSales\nAS\nSELECT TOP 100 *\nFROM OPENROWSET(​PROVIDER = 'CosmosDB',\n                CONNECTION = 'Account=srgosqlcos;Database=RetailSalesDemoDB',\n                OBJECT = 'RetailSales',\n                SERVER_CREDENTIAL = 'srgosqlcos2'\n) AS [RetailSales]\n\nCREATE VIEW StoreDemoGraphics\nAS\nSELECT TOP 100 *\nFROM OPENROWSET(​PROVIDER = 'CosmosDB',\n                CONNECTION = 'Account=srgosqlcos;Database=RetailSalesDemoDB',\n                OBJECT = 'StoreDemoGraphics',\n                SERVER_CREDENTIAL = 'srgosqlcos2'\n) AS [StoreDemoGraphics]\n\n---- View Joins\n\nselect * \nfrom Retailsales as p inner join StoreDemoGraphics as q\n on q.storeid=p.storeid\n group by p.advertising, p.storeid, p.weekstarting, p.largehh\n\n\n\n\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "temp"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"name": "Fluentbit View",
+	"properties": {
+		"content": {
+			"query": "CREATE VIEW Containerlogs2\nAS\nSELECT *, JSON_VALUE (jsonContent, '$.log') AS Log_entry, result.filepath(1) AS [podname],result.filepath(2) AS [year],\nresult.filepath(3) AS [month], result.filepath(4) AS [day], result.filepath(5) AS [hour], result.filepath(5) AS [minute]\nFROM \n    OPENROWSET( \n        BULK 'https://srgostorgen2hier.dfs.core.windows.net/fluentbit/*/*/*/*/*/*/*.log', \n        FORMAT = 'CSV', \n        FIELDQUOTE = '0x0b', \n        FIELDTERMINATOR ='0x0b' \n    )  WITH ( \n        jsonContent varchar(8000) \n    ) AS [result] \n\n\n\nselect * from Containerlogs2\nwhere year='2021' and podname='fluent-bit-bbd2c_logging_fluent-bit-500c20d544c1fe5d6e31a0d3a019da816c1e61f3eb4ce4c3116ceb9899a0c817'\n\n\n\n\n\n\n\n\n\n\n\n\n\n1 = fluent-bit-bbd2c_logging_fluent-bit-500c20d544c1fe5d6e31a0d3a019da816c1e61f3eb4ce4c3116ceb9899a0c817",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "temp"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

@@ -1,0 +1,21 @@
+{
+	"name": "SBA_data_analysis",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "loandemo_datalake",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Parquet",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"folderPath": "data_for_analysis",
+				"fileSystem": "loanfilecontainer"
+			},
+			"compressionCodec": "snappy"
+		},
+		"schema": []
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

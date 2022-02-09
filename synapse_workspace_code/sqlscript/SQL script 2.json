@@ -1,0 +1,16 @@
+{
+	"name": "SQL script 2",
+	"properties": {
+		"content": {
+			"query": "-- This is auto-generated code\nSELECT\n    TOP 100 GrAppv as Requested_amount , [Scored Labels] as Predicted_Amount\nFROM\n    OPENROWSET(\n        BULK 'https://srgostorgen2hier.dfs.core.windows.net/amloutput/amlscoreddata.csv',\n        FORMAT = 'CSV',\n        PARSER_VERSION='2.0',\nHEADER_ROW = TRUE\n    ) AS [result]\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "master"
+			}
+		},
+		"type": "SqlQuery"
+	}
+}

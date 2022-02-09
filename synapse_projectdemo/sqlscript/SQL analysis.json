@@ -1,0 +1,17 @@
+{
+	"name": "SQL analysis",
+	"properties": {
+		"content": {
+			"query": "SELECT [state],count([Risk])\n FROM [default].[dbo].[loantest02]\ngroup by [state]\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "default",
+				"poolName": "Built-in"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

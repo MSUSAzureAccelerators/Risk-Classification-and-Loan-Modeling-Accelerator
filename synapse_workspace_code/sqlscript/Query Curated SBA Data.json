@@ -1,0 +1,17 @@
+{
+	"name": "Query Curated SBA Data",
+	"properties": {
+		"content": {
+			"query": "SELECT TOP (100) [LoanNr_ChkDgt]\n,[Name]\n,[City]\n,[State]\n,[Zip]\n,[Bank]\n,[BankState]\n,[NAICS]\n,[ApprovalDate]\n,[ApprovalFY]\n,[Term]\n,[NoEmp]\n,[NewExist]\n,[CreateJob]\n,[RetainedJob]\n,[FranchiseCode]\n,[UrbanRural]\n,[RevLineCr]\n,[LowDoc]\n,[DisbursementDate]\n,[DisbursementGross]\n,[BalanceGross]\n,[MIS_Status]\n,[ChgOffPrinGr]\n,[GrAppv]\n,[SBA_Appv]\n FROM [dbo].[SBACurated2]\n\n\n ALTER TABLE SBACurated2 DROP COLUMN GrAppv",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "srgosqlpoolsyn",
+				"databaseName": "srgosqlpoolsyn"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

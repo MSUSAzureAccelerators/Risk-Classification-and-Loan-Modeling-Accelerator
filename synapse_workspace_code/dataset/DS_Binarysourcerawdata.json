@@ -1,0 +1,18 @@
+{
+	"name": "DS_Binarysourcerawdata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_SBASourceRawdata",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Binary",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "sbasourcerawdata"
+			}
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

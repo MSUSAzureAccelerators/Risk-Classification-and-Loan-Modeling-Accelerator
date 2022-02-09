@@ -1,0 +1,337 @@
+{
+	"name": "Load new scoring data",
+	"properties": {
+		"activities": [
+			{
+				"name": "Load into Synapse Dedicated Pool",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [
+					{
+						"name": "Source",
+						"value": "sbacurated//part-merged.csv"
+					},
+					{
+						"name": "Destination",
+						"value": "dbo.SBACurated2"
+					}
+				],
+				"typeProperties": {
+					"source": {
+						"type": "DelimitedTextSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "DelimitedTextReadSettings",
+							"skipLineCount": 0
+						}
+					},
+					"sink": {
+						"type": "SqlPoolSink",
+						"allowPolyBase": true,
+						"polyBaseSettings": {
+							"rejectValue": 0,
+							"rejectType": "value",
+							"useTypeDefault": true
+						}
+					},
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "linkedService1",
+							"type": "LinkedServiceReference"
+						}
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "LoanNr_ChkDgt",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LoanNr_ChkDgt",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Name",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "City",
+									"type": "String"
+								},
+								"sink": {
+									"name": "City",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "State",
+									"type": "String"
+								},
+								"sink": {
+									"name": "State",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "Zip",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Zip",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Bank",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Bank",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "BankState",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BankState",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "NAICS",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NAICS",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "ApprovalDate",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ApprovalDate",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ApprovalFY",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ApprovalFY",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Term",
+									"type": "String"
+								},
+								"sink": {
+									"name": "Term",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "NoEmp",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NoEmp",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "NewExist",
+									"type": "String"
+								},
+								"sink": {
+									"name": "NewExist",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "CreateJob",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CreateJob",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "RetainedJob",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RetainedJob",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "FranchiseCode",
+									"type": "String"
+								},
+								"sink": {
+									"name": "FranchiseCode",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "UrbanRural",
+									"type": "String"
+								},
+								"sink": {
+									"name": "UrbanRural",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "RevLineCr",
+									"type": "String"
+								},
+								"sink": {
+									"name": "RevLineCr",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "LowDoc",
+									"type": "String"
+								},
+								"sink": {
+									"name": "LowDoc",
+									"type": "Boolean"
+								}
+							},
+							{
+								"source": {
+									"name": "DisbursementDate",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DisbursementDate",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "DisbursementGross",
+									"type": "String"
+								},
+								"sink": {
+									"name": "DisbursementGross",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "BalanceGross",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BalanceGross",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "MIS_Status",
+									"type": "String"
+								},
+								"sink": {
+									"name": "MIS_Status",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "ChgOffPrinGr",
+									"type": "String"
+								},
+								"sink": {
+									"name": "ChgOffPrinGr",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "GrAppv",
+									"type": "String"
+								},
+								"sink": {
+									"name": "GrAppv",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "SBA_Appv",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SBA_Appv",
+									"type": "Int64"
+								}
+							}
+						]
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "SourceDataset_jwv",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "DestinationDataset_jwv",
+						"type": "DatasetReference"
+					}
+				]
+			}
+		],
+		"annotations": []
+	}
+}

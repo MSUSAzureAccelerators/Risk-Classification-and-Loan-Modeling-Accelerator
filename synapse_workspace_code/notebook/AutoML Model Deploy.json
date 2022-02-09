@@ -1,0 +1,177 @@
+{
+	"name": "AutoML Model Deploy",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "srgolarge",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "56g",
+			"driverCores": 8,
+			"executorMemory": "56g",
+			"executorCores": 8,
+			"numExecutors": 8,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "8",
+				"spark.dynamicAllocation.maxExecutors": "8"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/6f931dc1-9715-4a59-a849-0c049740fa0f/resourceGroups/Chubb/providers/Microsoft.Synapse/workspaces/srgosynapseunnmgd/bigDataPools/srgolarge",
+				"name": "srgolarge",
+				"type": "Spark",
+				"endpoint": "https://srgosynapseunnmgd.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/srgolarge",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "2.4",
+				"nodeCount": 10,
+				"cores": 16,
+				"memory": 112,
+				"automaticScaleJobs": false
+			},
+			"sessionKeepAliveTimeout": 30
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"source": [
+					"import azureml.core\n",
+					"\n",
+					"from azureml.core import Experiment, Workspace, Dataset, Datastore\n",
+					"from azureml.train.automl import AutoMLConfig\n",
+					"from azureml.data.dataset_factory import TabularDatasetFactory"
+				],
+				"execution_count": 1
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"subscription_id = \"6f931dc1-9715-4a59-a849-0c049740fa0f\"\n",
+					"resource_group = \"Chubb\"\n",
+					"workspace_name = \"srgoaml\"\n",
+					"experiment_name = \"srgosynapseunnmgd-sbacurated-20210323124733\"\n",
+					"\n",
+					"ws = Workspace(subscription_id = subscription_id, resource_group = resource_group, workspace_name = workspace_name)\n",
+					"experiment = Experiment(ws, experiment_name)"
+				],
+				"execution_count": 2
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"df = spark.sql(\"SELECT * FROM default.sbacurated LIMIT 6000\")\n",
+					"\n",
+					"datastore = Datastore.get_default(ws)\n",
+					"dataset = TabularDatasetFactory.register_spark_dataframe(df, datastore, name = experiment_name + \"-dataset\")"
+				],
+				"execution_count": 3
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"automl_config = AutoMLConfig(spark_context = sc,\n",
+					"                             task = \"regression\",\n",
+					"                             training_data = dataset,\n",
+					"                             label_column_name = \"GrAppv\",\n",
+					"                             primary_metric = \"spearman_correlation\",\n",
+					"                             experiment_timeout_hours = 1,\n",
+					"                             max_concurrent_iterations = 8,\n",
+					"                             enable_onnx_compatible_models = True)"
+				],
+				"execution_count": 4
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"run = experiment.submit(automl_config)"
+				],
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"displayHTML(\"<a href={} target='_blank'>Your experiment in Azure Machine Learning portal: {}</a>\".format(run.get_portal_url(), run.id))"
+				],
+				"execution_count": 6
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"run.wait_for_completion()\n",
+					"\n",
+					"import onnxruntime\n",
+					"import mlflow\n",
+					"import mlflow.onnx\n",
+					"\n",
+					"from mlflow.models.signature import ModelSignature\n",
+					"from mlflow.types import DataType\n",
+					"from mlflow.types.schema import ColSpec, Schema\n",
+					"\n",
+					"# Get best model from automl run\n",
+					"best_run, onnx_model = run.get_output(return_onnx_model=True)\n",
+					"\n",
+					"# Define utility functions to infer the schema of ONNX model\n",
+					"def _infer_schema(data):\n",
+					"    res = []\n",
+					"    for _, col in enumerate(data):\n",
+					"        t = col.type.replace(\"tensor(\", \"\").replace(\")\", \"\")\n",
+					"        if t in [\"bool\"]:\n",
+					"            dt = DataType.boolean\n",
+					"        elif t in [\"int8\", \"uint8\", \"int16\", \"uint16\", \"int32\"]:\n",
+					"            dt = DateType.integer\n",
+					"        elif t in [\"uint32\", \"int64\"]:\n",
+					"            dt = DataType.long\n",
+					"        elif t in [\"float16\", \"bfloat16\", \"float\"]:\n",
+					"            dt = DataType.float\n",
+					"        elif t in [\"double\"]:\n",
+					"            dt = DataType.double\n",
+					"        elif t in [\"string\"]:\n",
+					"            dt = DataType.string\n",
+					"        else:\n",
+					"            raise Exception(\"Unsupported type: \" + t)\n",
+					"        res.append(ColSpec(type=dt, name=col.name))\n",
+					"    return Schema(res)\n",
+					"\n",
+					"def _infer_signature(onnx_model):\n",
+					"    onnx_model_bytes = onnx_model.SerializeToString()\n",
+					"    onnx_runtime = onnxruntime.InferenceSession(onnx_model_bytes)\n",
+					"    inputs = _infer_schema(onnx_runtime.get_inputs())\n",
+					"    outputs = _infer_schema(onnx_runtime.get_outputs())\n",
+					"    return ModelSignature(inputs, outputs)\n",
+					"\n",
+					"# Infer signature of ONNX model\n",
+					"signature = _infer_signature(onnx_model)\n",
+					"\n",
+					"artifact_path = experiment_name + \"_artifact\"\n",
+					"mlflow.set_tracking_uri(ws.get_mlflow_tracking_uri())\n",
+					"mlflow.set_experiment(experiment_name)\n",
+					"\n",
+					"with mlflow.start_run() as run:\n",
+					"    # Save the model to the outputs directory for capture\n",
+					"    mlflow.onnx.log_model(onnx_model, artifact_path, signature=signature)\n",
+					"\n",
+					"    # Register the model to AML model registry\n",
+					"    mlflow.register_model(\"runs:/\" + run.info.run_id + \"/\" + artifact_path, \"srgosynapseunnmgd-sbacurated-20210323124733-Best4\")"
+				],
+				"execution_count": 7
+			}
+		]
+	}
+}

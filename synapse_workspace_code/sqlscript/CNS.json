@@ -1,0 +1,17 @@
+{
+	"name": "CNS",
+	"properties": {
+		"content": {
+			"query": "SELECT \n  [PARTICIPANT ID], [MARKET CODE], CUSIP, SUM([PURCHASE AMOUNT]-[SELL AMOUNT]) AS [BUY\\SELL DIRECTION]\nFROM\n    OPENROWSET(\n        BULK 'https://srgostorgen2hier.dfs.core.windows.net/cns/CNSsample.csv',\n        FORMAT = 'CSV',\n        PARSER_VERSION='2.0',\nHEADER_ROW = TRUE\n    ) AS [result]\nWHERE CUSIP IS NOT NULL\nGROUP BY [PARTICIPANT ID], [MARKET CODE], CUSIP \n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "temp"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

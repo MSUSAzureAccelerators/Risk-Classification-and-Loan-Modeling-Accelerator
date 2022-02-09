@@ -1,0 +1,129 @@
+{
+	"name": "SourceDataset_jwv",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "srgostorgen2hier",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "part-merged.csv",
+				"fileSystem": "sbacurated"
+			},
+			"columnDelimiter": ",",
+			"rowDelimiter": "\n",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "LoanNr_ChkDgt",
+				"type": "String"
+			},
+			{
+				"name": "Name",
+				"type": "String"
+			},
+			{
+				"name": "City",
+				"type": "String"
+			},
+			{
+				"name": "State",
+				"type": "String"
+			},
+			{
+				"name": "Zip",
+				"type": "String"
+			},
+			{
+				"name": "Bank",
+				"type": "String"
+			},
+			{
+				"name": "BankState",
+				"type": "String"
+			},
+			{
+				"name": "NAICS",
+				"type": "String"
+			},
+			{
+				"name": "ApprovalDate",
+				"type": "String"
+			},
+			{
+				"name": "ApprovalFY",
+				"type": "String"
+			},
+			{
+				"name": "Term",
+				"type": "String"
+			},
+			{
+				"name": "NoEmp",
+				"type": "String"
+			},
+			{
+				"name": "NewExist",
+				"type": "String"
+			},
+			{
+				"name": "CreateJob",
+				"type": "String"
+			},
+			{
+				"name": "RetainedJob",
+				"type": "String"
+			},
+			{
+				"name": "FranchiseCode",
+				"type": "String"
+			},
+			{
+				"name": "UrbanRural",
+				"type": "String"
+			},
+			{
+				"name": "RevLineCr",
+				"type": "String"
+			},
+			{
+				"name": "LowDoc",
+				"type": "String"
+			},
+			{
+				"name": "DisbursementDate",
+				"type": "String"
+			},
+			{
+				"name": "DisbursementGross",
+				"type": "String"
+			},
+			{
+				"name": "BalanceGross",
+				"type": "String"
+			},
+			{
+				"name": "MIS_Status",
+				"type": "String"
+			},
+			{
+				"name": "ChgOffPrinGr",
+				"type": "String"
+			},
+			{
+				"name": "GrAppv",
+				"type": "String"
+			},
+			{
+				"name": "SBA_Appv",
+				"type": "String"
+			}
+		]
+	}
+}

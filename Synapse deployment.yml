@@ -1,0 +1,30 @@
+
+name: Synapse deployment
+
+trigger: 
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: AzureResourceManagerTemplateDeployment@3
+  displayName: 'Synapse ARM Template deployment: Resource Group scope'
+  inputs:
+    azureResourceManagerConnection: 'MS Internal - SRGOLLA (6f931dc1-9715-4a59-a849-0c049740fa0f)'
+    subscriptionId: '6f931dc1-9715-4a59-a849-0c049740fa0f'
+    resourceGroupName: Apollo
+    location: 'East US 2'
+    csmFile: '$(System.DefaultWorkingDirectory)/_ketsha_Business-Loan-Modeling/srgosynapseunnmgd/TemplateForWorkspace.json'
+    csmParametersFile: '$(System.DefaultWorkingDirectory)/_ketsha_Business-Loan-Modeling/srgosynapseunnmgd/TemplateParametersForWorkspace.json'
+    overrideParameters: '-workspaceName "New_workspacename"
+
+steps:
+- task: AzureSynapseWorkspace.synapsecicd-deploy.synapse-deploy.Synapse workspace deployment@0
+  displayName: 'Synpase deployment task for workspace: All other artifacts'
+  inputs:
+    TemplateFile: '$(System.DefaultWorkingDirectory)/_ketsha_Business-Loan-Modeling/srgosynapseunnmgd/TemplateForWorkspace.json'
+    ParametersFile: '$(System.DefaultWorkingDirectory)/_ketsha_Business-Loan-Modeling/srgosynapseunnmgd/TemplateParametersForWorkspace.json'
+    azureSubscription: 'MS Internal - SRGOLLA (6f931dc1-9715-4a59-a849-0c049740fa0f)'
+    ResourceGroupName: 'New RG Name'
+    TargetWorkspaceName:'New Workspace name'
