@@ -21,13 +21,13 @@ Loans guaranteed by the SBA range from small to large and can be used for most b
 Lenders and loan programs have unique eligibility requirements. In general, eligibility is based on what a business does to receive its income, the character of its ownership,     and where the business operates. Normally, businesses must meet size standards, be able to repay, and have a sound business purpose. Even those with bad credit may qualify for     startup funding. The lender will provide you with a full list of eligibility requirements for your loan.
 
  Following are the baseline eligibility requirements:
-    # Be a for-profit business
+    * Be a for-profit business
       The business is officially registered and operates legally.
-    # Do business in the U.S.
+    * Do business in the U.S.
       The business is physically located and operates in the U.S. or its territories.
-    # Have invested equity
+    * Have invested equity
       The business owner has invested their own time or money into the business.
-    # Exhaust financing options
+    * Exhaust financing options
       The business cannot get funds from any other financial lender.
 
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/business-loan-factors-1.jpg?raw=true)
