@@ -2,13 +2,13 @@
 
 # Risk Classification and Loan Modeling
 
-The objective of the Risk Classification with Loan Modeling accelerator is to predict how much loan will be approved by the SBA & their registered lenders when a business applies for a loan through the SBA. 
+The objective of the Risk Classification with Loan Modeling accelerator is to predict how much loan amount will be approved by the SBA & their registered lenders when a business applies for a loan through the SBA. 
   
-The Small Business Administration (SBA) was founded in 1953 to assist small businesses and entrepreneurs in obtaining loans. Small businesses have been the primary source of employment in the United States-helping small businesses with job creation, which reduces unemployment. Small business growth also promotes economic growth. One of the ways the SBA helps small businesses is by guaranteeing bank loans. This guarantee reduces the risk to banks and encourages them to lend to small businesses. If the loan defaults, the SBA covers the amount guaranteed, and the bank suffers a loss for the remaining balance.
+The Small Business Administration (SBA) was founded in 1953 to assist small businesses and entrepreneurs in obtaining loans. Small businesses have been the primary source of employment in the United States-helping with job creation which reduces unemployment. Small business growth also promotes economic growth. One of the ways the SBA helps small businesses is by guaranteeing bank loans. This guarantee reduces the risk to banks and encourages them to lend to small businesses. If the loan defaults, the SBA covers the amount guaranteed, and the bank suffers a loss for the remaining balance.
 
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/SBA%20Loan%20High%20Level.png?raw=true)
 
-The SBA works with lenders to provide loans to small businesses. The agency doesn’t lend money directly to small business owners. Instead, it sets guidelines for loans made by its partnering lenders, community development organizations, and micro-lending institutions. The SBA reduces risk for lenders and makes it easier for them to access capital. That makes it easier for small businesses to get loans. Loans guaranteed by the SBA range from small to large and can be used for most business purposes, including long-term fixed assets and operating capital. 
+The SBA works with lenders to provide loans to small businesses. The agency doesn’t lend money directly to small business owners. Instead, it sets guidelines for loans made by its partnering lenders, community development organizations, and micro-lending institutions. The SBA reduces risk for lenders and makes it easier for them to access capital which makes it easier for small businesses to get loans. Loans guaranteed by the SBA range from small to large and can be used for most business purposes, including long-term fixed assets and operating capital. 
 
 ## What you need to know about SBA Loan
 
@@ -22,17 +22,17 @@ Lenders and loan programs have unique eligibility requirements. In general, elig
  * Be a for-profit business - the business is officially registered and operates legally.
  * Do business in the United States - the business is physically located and operates in the U.S. or its territories.
  * Have invested equity - the business owner has invested their own time or money into the business.
- * Exhaust financing options - The business cannot get funds from any other financial lender.
+ * Exhaust financing options - the business cannot get funds from any other financial lender.
 
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/business-loan-factors-1.jpg?raw=true)
 
 ## Business Loans for Exporters
 
-Most U.S. banks view loans for exporters as risky. This can make it harder to get loans for things like day-to-day operations, advance orders with suppliers, and debt refinancing. That’s why the SBA created programs to make it easier for U.S. small businesses to get export loans.
+Most U.S. banks view loans for exporters as risky. This can make it harder to get loans for things like day-to-day operations, advance orders with suppliers, and debt refinancing. This is why the SBA created programs to make it easier for U.S. small businesses to get export loans.
 
 ## The Business Loan Data Set (reference : www.kaggle.com)
 
-The original data set is from the U.S. SBA loan database, which includes historical data from 1987 through 2014 (899,164 observations) with 27 variables. The data set includes information on whether the loan was paid off in full or if the SBA had to charge off any amount and how much that amount was. The data set used is a subset of the original set. It contains loans about the Real Estate and Rental and Leasing industry in California. This file has 2,102 observations and 35 variables. The column default is an integer of 1 or zero, and I had to change this column to a factor.
+The original data set is from the U.S. SBA loan database, which includes historical data from 1987 through 2014 (899,164 observations) with 27 variables. The data set includes information on whether the loan was paid off in full or if the SBA had to charge off any amount and how much that amount was. The data set used is a subset of the original set. It contains loans about the Real Estate and Rental and Leasing industry in California. This file has 2,102 observations and 35 variables. The column default is an integer of 1 or zero (I had to change this column to a factor).
   
             Variable Name			Description
             LoanNr_ChkDgt			    Identifier Primary key
@@ -155,7 +155,6 @@ During Stage 1, we could have also deployed a Real-time Inference pipeline which
 [![Deploy To Azure](https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/1-CONTRIBUTION-GUIDE/images/deploytoazure.svg?sanitize=true)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2FMSUSSolutionAccelerators%2FRisk-Classification-and-Load-Modeling-Solution-Accelerator%2Fmain%2FTemplateForWorkspace.json )
 
 ## License
-
 Copyright (c) Microsoft Corporation
 
 All rights reserved.
@@ -167,6 +166,7 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED AS IS, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE
+
 
 ## Contributing
 
@@ -184,9 +184,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ## Trademarks
 
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
+This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft trademarks or logos is subject to and must follow 
 [Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
 Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
 Any use of third-party trademarks or logos are subject to those third-party's policies.
-
