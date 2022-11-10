@@ -75,23 +75,23 @@ The original data set is from the U.S. SBA loan database, which includes histori
 
 ## Implementation Detail
 
-Goal is to train ML model on the SBA loan data and then build a Data engineering pipeline which can further process one or many new loan requests coming in as either API and/or Batch requests. Azure Synapse Pipe from Azure Synapse Workspace is used for consuming data from third party (same can be achieved by leveraging Azure Data Factory). Azure Synapse pipeline was used for multiple purpose:
+Goal is to train Machine Learning (ML) model on the SBA loan data and then build a Data engineering pipeline which can further process one or many new loan requests coming in as either API and/or Batch requests. Azure Synapse Pipe from Azure Synapse Workspace is used for consuming data from third party (same can be achieved by leveraging Azure Data Factory). Azure Synapse pipeline was used for multiple purposes:
 
 1. Data Ingestion (Third Party API to ADLS Gen2)
 2. Orchestration
 
-Azure Machine Learning service was used for building and training Machine Learning (ML) model. Once a model was built, then Azure Synapse Pipeline was levaraged for orchestrating a call to Azure ML Batch pipeline to score on new SBI loan data requests.
+Azure Machine Learning service was used for building and training ML model. Once a model was built, then Azure Synapse Pipeline was levaraged for orchestrating a call to Azure ML Batch pipeline to score on new SBI loan data requests.
 
 Stages to accomplish goal:
 Stage 1: Build a ML model
 To build an ML model, we need to first cleanse the public data to a conformed state which we can feed to train a machine learning model.
 1)	Ingesting the SBA data from a Source (typically this would be a partner or data provider who provides a storage account\FTP site to access this data). Copy data activity in the below. Synapse pipeline will be able to copy the data from a remote partner to a local storage account. For this demo we are copying binary files from “sbasourcerawdata” to “sba” containers
 
-2)	Once we get the data(CSV file) in our scenario, we need to cleanse this data to shape it into a structure which is good enough to train a Machine Learning model. For that purpose, we are using a Dataflow activity within Synapse pipelines, where we can shape and structure the original raw data. Dataflow uses Synapse Spark clusters in the background to execute these transformations and your training data even if it is in TB’s can be quickly processed and cleansed. For this demo, the source of the Dataflows would be “sba” container and the sink of the dataflow would land it in “sbacurated” container.
+2)	Once we get the data (CSV file) in our scenario, we need to cleanse this data to shape it into a structure which is good enough to train a Machine Learning model. For that purpose, we are using a Dataflow activity within Synapse pipelines, where we can shape and structure the original raw data. Dataflow uses Synapse Spark clusters in the background to execute these transformations and your training data, even if it is in TB’s, can be quickly processed and cleansed. For this demo, the source of the Dataflows would be “sba” container and the sink of the dataflow would land it in “sbacurated” container.
 
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/Step1-Dataload.png?raw=true)
 
-Dataflow activity looks like the below structure where we define datatypes and formats. Clean unnecessary characters like “$” values. Remove unnecessary columns etc which is not needed to train the model etc. Finally, the output will be written in a Dataset which is cleansed and ready to be fed into Azure Machine Learning for training a model.
+Dataflow activity looks like the below structure where we define datatypes and formats. Clean unnecessary characters like “$” values. Remove unnecessary columns etc which is not needed to train the model, etc. Finally, the output will be written in a Dataset which is cleansed and ready to be fed into Azure Machine Learning for training a model.
 
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/Step2-Datacuration.png?raw=true) 
 
