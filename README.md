@@ -102,18 +102,18 @@ We built the following pipeline to train a model using this training data which 
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/Step3-AzureML.png?raw=true)
 
 The curated data which we processed in the previous steps using Dataflows is registered as a Dataset in Azure ML. That dataset which is shown as “sbacurated” acts as the training data. It goes through few steps like Splitting the data, filtering unnecessary columns etc and finally Train a model. We are using Boosted Decision Tree regression algorithm here but you can try different regression algorithms to compare the accuracy etc.
-Once you are satisfied with the model metrics like Accuracy, Spearman correlation etc, the last step of the Model is to export out the Scored Data to a CSV file. This file is getting saved in the “amloutput” on the storage container and finally publishing this as a Batch pipeline.
+Once you are satisfied with the model metrics like Accuracy, Spearman correlation, etc., the last step of the Model is to export out the Scored Data to a CSV file. This file is getting saved in the “amloutput” on the storage container and finally publishing this as a Batch pipeline.
 Here is a Batch pipeline which is shown after getting published. This is the Batch inference pipeline which comes with an endpoint. This will be executed as part of the Synapse pipeline for doing batch scoring on new SBA loan requests as part of a nightly schedule as explained in next stage.
  
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/Step4-AzureML.png?raw=true)
 
 Stage 2: Build a Synapse pipeline to do daily Batch inferencing on new SBA loan requests 
-As the ML model\Batch inference pipeline is already built in the previous step, now we need to execute a Synapse pipeline on a daily schedule, which will retrieve all the new data, cleanse it to make sure that there are no data consistency issues and finally call the Azure ML pipeline which we have built in the earlier stage. Step 1 and 2 in this stage are the same as the earlier stage and hence not repeating them for brevity purposes. You can reuse the same pipeline which you built earlier to add the last activity to execute a Machine learning pipeline as shown below.
+As the ML model\Batch inference pipeline is already built in the previous step, now we need to execute a Synapse pipeline on a daily schedule, which will retrieve all the new data, cleanse it to make sure that there are no data consistency issues and finally call the Azure ML pipeline which we have built in the earlier stage. Step 1 and 2 in this stage are the same as the earlier stage and hence not repeating them for brevity purposes. You can reuse the same pipeline which you built earlier to add the last activity to execute a Machine Learning pipeline as shown below.
 
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/Step5-AzureSynapsePipeline.png?raw=true)
 
-The last step of the Syanpse pipeline, calls an Azure ML pipeline which we have built in the earlier stage. This step will trigger the Batch inference pipeline in Azure ML.
-From an Azure ML side, the Batch inference run would look something like the below image which confirms that all the stage completed. successfully
+The last step of the Synapse pipeline, calls an Azure ML pipeline which we have built in the earlier stage. This step will trigger the Batch inference pipeline in Azure ML.
+From an Azure ML side, the Batch inference run would look something like the below image which confirms that all the stages have been completed successfully
 
 ![name-of-you-image](https://github.com/ketsha/Business-Loan-Modeling/blob/main/images/Step6-AzureML.png?raw=true)
 
